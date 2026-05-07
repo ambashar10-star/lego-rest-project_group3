@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/*The robot reports back to /setsensordata */
 @Entity
 @Table(name="sensordata")
 public class SensorData {
