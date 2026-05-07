@@ -36,12 +36,11 @@ public class LegoService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Lego setValues(Lego lego) {
-		// create a connection to the database
-	    EntityManager em=emf.createEntityManager();
-	    em.getTransaction().begin();
-	    em.persist(lego);
-	    em.getTransaction().commit();		
-		return lego;
+	    EntityManager em=emf.createEntityManager(); // create a connection to the database
+	    em.getTransaction().begin(); // start transaction of values 
+	    em.persist(lego); // start saving set values
+	    em.getTransaction().commit(); // save changes		
+		return lego; // send the saved object back to JSON
 	}
 	
 	@SuppressWarnings("unchecked")
