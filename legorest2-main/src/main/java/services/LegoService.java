@@ -42,7 +42,8 @@ public class LegoService {
 	    em.getTransaction().commit(); // save changes		
 		return lego; // send the saved object back to JSON
 	}
-	
+
+	/*Robot reads the commands from the database through /getvalues */
 	@SuppressWarnings("unchecked")
 	@Path("/getvalues")
 	@GET
