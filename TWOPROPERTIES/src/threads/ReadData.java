@@ -30,7 +30,7 @@ public class ReadData implements Runnable{
 				conn = (HttpURLConnection)url.openConnection();
 				InputStream is=null;
 				try {
-					is=conn.getInputStream();
+					is=conn.getInputStream(); //receive the data from the server
 				}
 				catch (Exception e) {
 		  			System.out.println("Exception conn.getInputSteam()");
@@ -40,12 +40,14 @@ public class ReadData implements Runnable{
 				isr = new InputStreamReader(is);
 	      		br=new BufferedReader(isr);
 				while ((s=br.readLine())!=null){
+					// 130#0#-10#-50
 					String [] values=s.split("#");
 					Robot.setId(values[0]);
 					Robot.setRun(values[1]);
 					Robot.setSpeed(values[2]);
 					Robot.setTurn(values[3]);
 				}
+				// closing the connections
 				br.close();
 				isr.close();
 				is.close();
