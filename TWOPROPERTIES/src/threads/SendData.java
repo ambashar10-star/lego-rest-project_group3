@@ -28,10 +28,11 @@ public class SendData implements Runnable {
                 URL url = new URL("http://192.168.0.102:8080/rest/lego/setsensordata");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setDoOutput(true);
+                conn.setRequestMethod("POST");  // sending info back to web
+                conn.setRequestProperty("Content-Type", "application/json"); // data formatted as JSON
+                conn.setDoOutput(true); // write data to the connection
 
+                // building the json string
                 String json = "{"
                         + "\"sensorType\":\"wall\","
                         + "\"sensorValue\":10,"
@@ -41,7 +42,7 @@ public class SendData implements Runnable {
                         + "}";
 
                 OutputStream os = conn.getOutputStream();
-                os.write(json.getBytes());
+                os.write(json.getBytes()); //pushes the JSON string through the network to thr web service.
                 os.flush();
                 os.close();
 
