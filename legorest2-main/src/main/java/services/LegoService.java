@@ -96,6 +96,9 @@ public class LegoService {
     	return list;
 	}
 
+	/*Calculates average speed
+	total commands, total sensor events,
+	wall events, light events */
 	@Path("/getstats")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
