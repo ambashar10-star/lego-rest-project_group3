@@ -10,6 +10,7 @@ import java.net.URL;
 import data.*;
 
 public class ReadData implements Runnable{
+	// Java objects to make an HTTP GET request.
     URL url = null;
 	HttpURLConnection conn = null;
 	InputStreamReader isr = null;
