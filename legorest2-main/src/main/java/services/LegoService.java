@@ -58,6 +58,7 @@ public class LegoService {
 		return lego.getId()+"#"+lego.getRun()+"#"+lego.getSpeed()+"#"+lego.getTurn(); // returns data as a string 
 	}
 
+	//This method is to receive data from the robot 
 	@Path("/setsensordata")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
