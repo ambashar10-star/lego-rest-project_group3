@@ -75,6 +75,7 @@ public class LegoService {
     	return sensorData;
 	}
 
+	/*returns recent sensor records as JSON */
 	@SuppressWarnings("unchecked")
 	@Path("/getsensordata")
 	@GET
