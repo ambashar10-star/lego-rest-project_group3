@@ -29,8 +29,7 @@ public class LightCheck implements Runnable {
 
             System.out.println("Light: " + lightValue);
 
-            // You must calibrate this value.
-            // Lower value normally means black/dark surface.
+          // below 15 is a black surface
             if (lightValue < 15) {
                 System.out.println("Black line detected");
 
