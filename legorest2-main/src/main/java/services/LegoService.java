@@ -17,20 +17,26 @@ import data.*;
 
 @Path("/lego")
 public class LegoService {
+	// set up the connection to lego database
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("lego");	
 	
-	@Path("/getlego")
-	@GET
+	@Path("/getlego") // URL test endpoint
+	@GET //for reading data
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getLego() {
 		return "Lego service Legorest2!";
 	}
-	
+
+	/*This method receives robot control values as JSON,
+	converts them into a Lego object,
+	saves them into the database,
+	returns the saved object as JSON */
 	@Path("/setvalues")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Lego setValues(Lego lego) {
+		// create a connection to the database
 	    EntityManager em=emf.createEntityManager();
 	    em.getTransaction().begin();
 	    em.persist(lego);
