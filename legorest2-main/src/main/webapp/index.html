@@ -49,6 +49,7 @@
 <body>
 
 <script>
+  //create an object (container for related values)
   var lego = new Object();
   lego.id = 1;
   lego.run = 1;
@@ -56,30 +57,39 @@
   lego.turn = 0;
   lego.aika = 0;
 
+  //sends the current command to the backend/server
   function sendData(form){
-    var json = JSON.stringify(lego);
+    var json = JSON.stringify(lego);  //converts the lego object into JSON
     var xhttp = new XMLHttpRequest();
 
+    //shows the JSON text on the webpage under:Last JSON Sent
     document.getElementById("setvalues").innerHTML = json;
 
+    //On condition that the server replies successfully, run this code.
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         var settings = JSON.parse(this.responseText);
+
+
+        //we use this to see the latest commands on the webpage 
         document.getElementById("settings").innerHTML =
           "ID=" + settings.id +
           " | Run=" + settings.run +
           " | Speed=" + settings.speed +
           " | Turn=" + settings.turn;
 
-        loadStats();
+        loadStats();  //refresh the statistics after sending the command 
       }
     };
 
+
+    //sends and saves new data
     xhttp.open("POST","/rest/lego/setvalues",true);
     xhttp.setRequestHeader("Content-type","application/json");
     xhttp.send(json);
   }
 
+  //control button functions
   function turnLeft(form){
     lego.turn = lego.turn - 10;
     sendData(form);
@@ -110,6 +120,8 @@
     sendData(form);
   }
 
+
+  //This function asks the backend for current statistics from (getstats)
   function loadStats(){
     var xhttp = new XMLHttpRequest();
 
@@ -128,6 +140,7 @@
     xhttp.send();
   }
 
+  //This function asks the backend for recent sensor events (getsensordata)
   function loadSensorEvents(){
     var xhttp = new XMLHttpRequest();
 
@@ -135,6 +148,7 @@
       if (this.readyState == 4 && this.status == 200){
         var events = JSON.parse(this.responseText);
 
+        //creates a table to to display the sensor data
         var html = "";
         html += "<table>";
         html += "<tr>";
@@ -146,7 +160,8 @@
         html += "<th>Action</th>";
         html += "<th>Time</th>";
         html += "</tr>";
-
+        
+        //for each event it adds a row to the table 
         for (var i = 0; i < events.length; i++) {
           html += "<tr>";
           html += "<td>" + events[i].id + "</td>";
@@ -161,6 +176,8 @@
 
         html += "</table>";
 
+
+        //displays the finished table on the webpage 
         document.getElementById("sensorEvents").innerHTML = html;
       }
     };
@@ -223,6 +240,7 @@
   <input type="button" value="Refresh Sensor Events" onclick="loadSensorEvents();">
 </div>
 
+//shows the last command sent to the backend 
 <div class="section">
   <h3>Last JSON Sent</h3>
   <p id="setvalues">Nothing sent yet.</p>
