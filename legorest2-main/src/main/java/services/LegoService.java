@@ -51,11 +51,11 @@ public class LegoService {
 	public String getValues() {
 	    EntityManager em=emf.createEntityManager();
 	    em.getTransaction().begin();
-		Query q=em.createQuery("select s from Lego s order by s.id desc").setMaxResults(1);
+		Query q=em.createQuery("select s from Lego s order by s.id desc").setMaxResults(1); //run database SQL queries
 		List<Lego> list=q.getResultList();
 		em.getTransaction().commit();
 		Lego lego=list.get(0);
-		return lego.getId()+"#"+lego.getRun()+"#"+lego.getSpeed()+"#"+lego.getTurn();
+		return lego.getId()+"#"+lego.getRun()+"#"+lego.getSpeed()+"#"+lego.getTurn(); // returns data as a string 
 	}
 
 	@Path("/setsensordata")
